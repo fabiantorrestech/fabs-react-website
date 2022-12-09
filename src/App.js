@@ -1,9 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import '@fontsource/roboto/400.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CustomButton from './components/CustomButton';
-
+import NavBar from './components/NavBar';
 
 const theme = createTheme({
   palette: {
@@ -15,9 +13,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: [
-      'Roboto'
-    ],
+    fontFamily: ['Roboto'],
     h4: {
       fontWeight: 600,
       fontSize: 28,
@@ -34,11 +30,10 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <CustomButton txt="My Button"/>
-         {/* <CustomButton/> */}
+        <NavBar/>
       </ThemeProvider>
     </div>
   );
 }
 
-export default App;
+export default App
