@@ -1,55 +1,38 @@
-import React from 'react'
-import logo from '../assets/logo.svg'               // imported assets for the navbar
-import logoMobile from '../assets/logoMobile.svg'
-import { Toolbar, Typography } from '@mui/material' // these two needed for toolbar
-import { styled } from '@mui/material'
+import React from 'react';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import CustomButton from './CustomButton'
+import { styled } from '@mui/material/styles';
 
-const styles = styled({
-    bar:{       // class name
-      paddingTop: "1.15rem",
-      backgroundColor: "#fff",
-      ['@media (max-width:780px)']:{flexMedia: "column"}, // media queries - for different devices and web-browser sizes
-    },
-    // logo: {
-    //   width: "15%", 
-    //   ['@media (max-width:780px)']: {display: "none"},
-    // },
-    // logoMobile:{
-    //   width: "100%", 
-    //   display: "none", 
-    //   ['@media (max-width:780px)']: {display: "inline-block"},
-    // },
-    menuItem: {
-      cursor: "pointer", 
-      flexGrow: 1,
-      "&:hover": {color:  "#4f25c8"},
-      ['@media (max-width:780px)']: {paddingBottom: "1rem"},
-    }
+// StackOverflow on Styled() in MUIv45: https://stackoverflow.com/questions/74738970/how-to-style-toolbar-with-mui-v5-with-styled-instead-of-makestyles-with-this
 
-})
+// 👇 This component based on Toolbar
+const MyToolbar = styled(Toolbar)(({ theme }) => ({
+  paddingTop: '1.15rem',
+  backgroundColor: '#fff',
+  color: 'rgba(0, 0, 0, 0.87)',
+  position: 'sticky',
+  [theme.breakpoints.down('md')]: { flexDirection: 'column' } // for reformatting on screen-resizing in MUI
+}));
 
-function NavBar() {
-  const classes = styles()
+// 👇 This component based on Typography
+const MyItem = styled(Typography)(({ theme }) => ({
+  cursor: 'pointer',
+  flexGrow: 1,
+  '&:hover': { color: '#4f25c8' },
+  [theme.breakpoints.down('md')]: { paddingBottom: '1rem' }
+}));
+
+export default function App() {
   return (
-    <Toolbar position="sticky" color="rgba(0, 0, 0, 0.87)" className={classes.bar}>
-      {/* <img src={logo} className={classes.logo}/>
-      <img src={logoMobile} className={classes.logoMobile}/> */}
-      <Typography variant="h5" className={classes.menuItem}>
-        About Me
-      </Typography>
-      <Typography variant="h5" className={classes.menuItem}>
-        Projects
-      </Typography>
-      <Typography variant="h5" className={classes.menuItem}>
-        Resume
-      </Typography>
-      <Typography variant="h5" className={classes.menuItem}>
-        Contact Me
-      </Typography>
-      <CustomButton txt="a test button!"></CustomButton>
-    </Toolbar>   
-  )
+    <MyToolbar>
+      {/* insert logo here for my website! */}
+      <MyItem variant="h5">About Me</MyItem>
+      <MyItem variant="h5">Projects</MyItem>
+      <MyItem variant="h5">Resume</MyItem>
+      <MyItem variant="h5">Contact Me</MyItem>
+      <CustomButton txt='test-button'>Custom Btn</CustomButton>
+    </MyToolbar>
+  );
 }
-
-export default NavBar
